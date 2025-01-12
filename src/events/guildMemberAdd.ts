@@ -1,10 +1,13 @@
 import {EmbedBuilder, Guild, GuildBasedChannel, GuildMember} from "discord.js";
+import {memberCount, setMemberCount} from "../helpers/state";
 
 const {Events} = require('discord.js');
 
 module.exports = {
     name: Events.GuildMemberAdd,
     async execute(guildMember: GuildMember) {
+        setMemberCount(memberCount + 1);
+
         const welcomeChannel: GuildBasedChannel = getChannelById(guildMember.guild, "1327672068396810312");
 
         if (welcomeChannel && welcomeChannel.isTextBased()) {
@@ -19,7 +22,7 @@ module.exports = {
         }
 
         const memberCountChannel: GuildBasedChannel = getChannelById(guildMember.guild, "1327664288160022621");
-        await memberCountChannel.setName(memberCountChannel.name.replace(/(\d+)/, (guildMember.guild.memberCount - 1).toString()))
+        await memberCountChannel.setName(memberCountChannel.name.replace(/(\d+)/, (guildMember.guild.memberCount - 1).toString()));
     },
 };
 
