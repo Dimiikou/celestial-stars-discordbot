@@ -1,7 +1,5 @@
-﻿import {setMemberCount} from "../helpers/state";
-
+﻿const {setMemberCount} = require( "../helpers/state.js");
 const {guildId} = require('../configs/config.json');
-
 const {Events} = require('discord.js');
 
 module.exports = {
