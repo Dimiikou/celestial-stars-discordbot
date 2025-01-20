@@ -1,7 +1,8 @@
-﻿const fs = require('node:fs');
-const path = require('node:path');
-const {Client, Collection, GatewayIntentBits} = require('discord.js');
-const {token} = require('./configs/config.json');
+﻿import fs from 'node:fs';
+import path from 'node:path';
+import {Client, Collection} from 'discord.js';
+import {GatewayIntentBits} from 'discord-api-types/v10';
+import config from './configs/config.json' assert {type: 'json'};
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds,
@@ -43,4 +44,4 @@ for (const file of eventFiles) {
     }
 }
 
-client.login(token);
+client.login(config.token);

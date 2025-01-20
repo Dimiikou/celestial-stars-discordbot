@@ -1,6 +1,7 @@
 ﻿const {setMemberCount} = require( "../helpers/state.js");
 const {guildId} = require('../configs/config.json');
 const {Events} = require('discord.js');
+import { startServer } from '../webhooks/streamOnline.js';
 
 module.exports = {
     name: Events.ClientReady,
@@ -12,5 +13,6 @@ module.exports = {
         }
 
         console.log(`Ready! Logged in as ${client.user.tag}`);
+        startServer();
     },
 };
