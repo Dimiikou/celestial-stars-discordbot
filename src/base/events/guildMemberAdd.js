@@ -1,5 +1,6 @@
 const {EmbedBuilder, Events} = require("discord.js");
 const {memberCount, setMemberCount} = require("../helpers/state.js");
+import {getChannelById} from "../helpers/helpers.js";
 
 module.exports = {
     name: Events.GuildMemberAdd,
@@ -23,7 +24,3 @@ module.exports = {
         await memberCountChannel.setName(memberCountChannel.name.replace(/(\d+)/, (guildMember.guild.memberCount - 1).toString()));
     },
 };
-
-function getChannelById(guild, id) {
-    return guild.channels.cache.find(memberCountChannel => memberCountChannel.id === id);
-}
