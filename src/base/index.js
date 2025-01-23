@@ -1,10 +1,11 @@
 ﻿import fs from 'node:fs';
 import path from 'node:path';
-import api, {port} from '../api/api.js';
+import api, {port, subscribeWebhooks} from '../api/api.js';
 import {Client, Collection} from 'discord.js';
 import {GatewayIntentBits} from 'discord-api-types/v10';
 import {initConfigs} from "./helpers/configLoader.js";
 
+const {config} = await initConfigs();
 const client = new Client({
     intents: [GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
@@ -48,6 +49,11 @@ for (const file of eventFiles) {
 api.listen(port, () => {
     console.log(`API gestartet, listening auf Port ${port}`);
 });
-const { config} = await initConfigs();
 
 client.login(config.token);
+
+subscribeWebhooks();
+
+export function getClient() {
+    return client;
+}
